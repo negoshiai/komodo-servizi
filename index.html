@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komodo Servizi | Forza e Precisione per i Vostri Spazi</title>
+    <meta name="description" content="Komodo Servizi offre soluzioni complete di facility management: pulizie civili e industriali, logistica, portierato, giardinaggio e disinfestazione. Affidabilità e professionalità al servizio della vostra azienda.">
+    <meta name="keywords" content="facility management, pulizie industriali, logistica, portierato, giardinaggio, disinfestazione, servizi per aziende, Komodo Servizi">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --komodo-green: #354F52;
+            --volcanic-grey: #2F3E46;
+            --digital-lime: #A2E35A;
+            --clean-white: #F8F9FA;
+            --dark-bg: #1a1a1a;
+            --text-light: #EAEAEA;
+            --text-medium: #a0a0a0;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            cursor: none;
+        }
+        
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--digital-lime);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+            z-index: 9999;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-trail.hover {
+            width: 50px;
+            height: 50px;
+            opacity: 0.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--clean-white);
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--digital-lime);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-medium);
+        }
+
+        a {
+            color: var(--digital-lime);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--clean-white);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: none;
+        }
+
+        .btn-primary {
+            background-color: var(--digital-lime);
+            color: var(--volcanic-grey);
+            border: 2px solid var(--digital-lime);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(162, 227, 90, 0.2);
+            color: var(--volcanic-grey);
+        }
+
+        /* Animate on Scroll */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .header.scrolled {
+            background-color: var(--volcanic-grey);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--clean-white);
+        }
+
+        .logo span {
+            color: var(--digital-lime);
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-item {
+            margin-left: 35px;
+        }
+
+        .nav-link {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--digital-lime);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--clean-white);
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-image: linear-gradient(rgba(26, 26, 26, 0.7), rgba(26, 26, 26, 0.9)), url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            color: var(--clean-white);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px rgba(162, 227, 90, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* Komodo Scale Pattern */
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(var(--volcanic-grey) 15%, transparent 16%),
+                radial-gradient(var(--volcanic-grey) 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            opacity: 0.05;
+            transform: scale(1.5);
+            z-index: 1;
+        }
+        
+        /* About Section */
+        #chisiamo {
+            background-color: var(--dark-bg);
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .about-card {
+            background-color: #242424;
+            padding: 2.5rem 2rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--digital-lime);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .about-card h3 {
+            color: var(--digital-lime);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .about-story {
+            margin-top: 5rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Services Section */
+        #servizi {
+            background-color: #202020;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .service-card {
+            background: var(--volcanic-grey);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(162, 227, 90, 0.15);
+        }
+
+        .service-icon {
+            margin-bottom: 1.5rem;
+            height: 80px;
+            width: 80px;
+            background-color: var(--digital-lime);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(15deg);
+        }
+        
+        .service-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--volcanic-grey);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Clients Section */
+        #clienti {
+            background-color: var(--dark-bg);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            align-items: center;
+        }
+
+        .client-logo {
+            padding: 2rem;
+            background-color: #242424;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: filter 0.3s ease, opacity 0.3s ease, background-color 0.3s ease;
+        }
+
+        .client-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            background-color: var(--volcanic-grey);
+        }
+        
+        .client-logo span {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+        }
+
+        /* Contact Section */
+        #contatti {
+             background-color: #202020;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 15px;
+            background-color: #2f2f2f;
+            border: 1px solid #444;
+            border-radius: 5px;
+            color: var(--text-light);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--digital-lime);
+            box-shadow: 0 0 10px rgba(162, 227, 90, 0.2);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info ul {
+            list-style: none;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info li svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--digital-lime);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--volcanic-grey);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--clean-white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo span {
+            color: var(--digital-lime);
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 15px;
+        }
+
+        .footer-links a {
+            color: var(--text-medium);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .social-icons {
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .social-icons svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-medium);
+            transition: fill 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-icons a:hover svg {
+            fill: var(--digital-lime);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2rem; }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background-color: var(--volcanic-grey);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-item {
+                margin: 2.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            h1 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1.1rem; }
+            .section { padding: 80px 0; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { width: 95%; }
+            h1 { font-size: 2rem; }
+            .btn { padding: 12px 28px; font-size: 0.9rem;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="cursor-trail"></div>
+
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">KOMODO<span>.</span></a>
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#chisiamo" class="nav-link">Chi Siamo</a></li>
+                    <li class="nav-item"><a href="#servizi" class="nav-link">Servizi</a></li>
+                    <li class="nav-item"><a href="#clienti" class="nav-link">Clienti</a></li>
+                    <li class="nav-item"><a href="#contatti" class="nav-link">Contatti</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <div class="container">
+                <div class="hero-content animate-on-scroll">
+                    <h1>I Vostri Spazi, La Nostra Missione.</h1>
+                    <p>Forza e precisione al servizio della vostra azienda. Gestiamo il vostro territorio con l'affidabilità di un leader.</p>
+                    <a href="#contatti" class="btn btn-primary">Richiedi un preventivo gratuito</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="chisiamo" class="section">
+            <div class="container">
+                <div class="text-center animate-on-scroll">
+                    <h2>Il Vantaggio Komodo</h2>
+                    <p>La nostra forza risiede nella capacità di dominare ogni aspetto del facility management.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card animate-on-scroll" style="transition-delay: 100ms;">
+                        <h3>Affidabilità Totale</h3>
+                        <p>Come il drago di Komodo nel suo habitat, garantiamo un controllo costante e una presenza impeccabile, assicurando che i vostri spazi siano sempre perfetti e sicuri.</p>
+                    </div>
+                    <div class="about-card animate-on-scroll" style="transition-delay: 200ms;">
+                        <h3>Soluzioni su Misura</h3>
+                        <p>Ogni cliente ha un territorio unico. Sviluppiamo piani d'azione personalizzati, precisi e letali contro ogni inefficienza, dallo sporco alla cattiva gestione logistica.</p>
+                    </div>
+                    <div class="about-card animate-on-scroll" style="transition-delay: 300ms;">
+                        <h3>Personale Qualificato</h3>
+                        <p>Il nostro team è il nostro branco. Formato, esperto e motivato, ogni membro opera con la massima professionalità per proteggere e valorizzare il vostro ambiente di lavoro.</p>
+                    </div>
+                </div>
+                <div class="about-story animate-on-scroll">
+                    <p>Komodo Servizi non si limita a pulire o gestire. Presidiamo il vostro territorio—il vostro ufficio, il vostro magazzino, il vostro giardino—con la forza e l'affidabilità di un leader, garantendo ordine e perfezione in ogni dettaglio.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="servizi" class="section">
+            <div class="container">
+                <div class="text-center animate-on-scroll">
+                    <h2>Un Unico Partner, Infinite Soluzioni</h2>
+                    <p>Un ecosistema di servizi integrati per la gestione completa del vostro ambiente.</p>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card animate-on-scroll" style="transition-delay: 100ms;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.755 13.32l-2.9-10.361c-.135-.483-.55-.83-1.047-.859h-2.229c-.665 0-1.2.535-1.2 1.2s.535 1.2 1.2 1.2h1.68l2.256 8.026h-3.815c-.665 0-1.2.535-1.2 1.2s.535 1.2 1.2 1.2h4.591c.491 0 .92-.333 1.053-.814.133-.48-.079-.99-.544-1.212zm-8.995-2.92v-3h-2.4v3h-3.6v2.4h3.6v3h2.4v-3h3.6v-2.4h-3.6zm-5.76-7.4h-3c-1.304 0-2.4 1.096-2.4 2.4v10.8h1.2v-10.8c0-.665.535-1.2 1.2-1.2h3v-1.2z"/></svg>
+                        </div>
+                        <h3>Pulizie Civili e Industriali</h3>
+                        <p>Precisione letale contro lo sporco. Interveniamo con la massima efficacia per garantire un'igiene impeccabile.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 200ms;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 7h-20c-.552 0-1 .448-1 1v12c0 .552.448 1 1 1h20c.552 0 1-.448 1-1v-12c0-.552-.448-1-1-1zm-10 12h-9v-2h9v2zm0-3h-9v-2h9v2zm0-3h-9v-2h9v2zm5-2h-4v-3h4v3zm5 5h-4v-2h4v2zm0-3h-4v-2h4v2zm0-3h-4v-2h4v2zm-12.894-8.599l-2.022-2.31c-.341-.389-.861-.59-1.378-.59h-1.706c-.517 0-1.037.201-1.378.59l-2.022 2.31c-.198.226-.298.51-.293.793.005.283.119.558.312.769l2.71 2.848h5.31l2.71-2.848c.193-.211.307-.486.312-.769.005-.283-.095-.567-.293-.793z"/></svg>
+                        </div>
+                        <h3>Logistica e Facchinaggio</h3>
+                        <p>Movimenti potenti, gestione impeccabile. La nostra logistica è la spina dorsale della vostra efficienza.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 300ms;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 1c-3.13 0-4.782 1.242-5.462 2.223-.284.404-.202.97.18 1.258.383.287.925.213 1.21-.18.497-.672 1.543-1.301 4.072-1.301 3.13 0 4.782 1.242 5.462 2.223.284.404.827.467 1.21.18.382-.288.464-.854.18-1.258-.68-.981-2.332-2.223-5.462-2.223zm6.419 12.335c-1.554-1.254-3.596-2.035-5.838-2.035-2.239 0-4.279.78-5.832 2.032l-.006.005c-.657.53-1.026 1.332-1.026 2.165v2.5c0 2.209 1.791 4 4 4h5.714c2.209 0 4-1.791 4-4v-2.5c0-.833-.369-1.635-1.026-2.165l.014-.007zm-1.419 6.665h-5.714c-1.103 0-2-.897-2-2v-2.5c0-.281.124-.542.342-.721.217-.179 2.008-1.583 3.658-1.583s3.441 1.404 3.658 1.583c.218.179.342.44.342.721v2.5c0 1.103-.897 2-2 2z"/></svg>
+                        </div>
+                        <h3>Portierato e Guardiania</h3>
+                        <p>Il vostro territorio, protetto. La nostra guardiania è una presenza vigile e affidabile, giorno e notte.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 400ms;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19.992 14.285c-.067.594-.523 1.05-1.117 1.117-2.33.26-4.594.92-6.551 2.04l-2.039-2.04c-.38-.38-.901-.585-1.434-.585-1.116 0-2.019.904-2.019 2.019v2.145c0 .533-.205 1.054-.585 1.434l-2.376 2.376c-.595.067-1.05.523-1.117 1.117-.091.802.493 1.485 1.295 1.576 4.385.495 8.48-1.161 11.313-4.664.445-.55.679-1.246.679-1.979v-2.81c0-.585-.475-1.06-1.06-1.06h-2.81c-.732 0-1.428.234-1.978.679-3.504 2.833-5.16 6.928-4.665 11.313.091.802.774 1.385 1.576 1.295.594-.067 1.05-.523 1.117-1.117l2.376-2.376c.38-.38.585-.901.585-1.434v-2.145c0-1.116.903-2.019 2.019-2.019.533 0 1.054.205 1.434.585l2.04 2.039c1.12-1.957 1.78-4.221 2.04-6.551.091-.802-.493-1.485-1.295-1.576z"/></svg>
+                        </div>
+                        <h3>Giardinaggio</h3>
+                        <p>Dominiamo la natura per creare e mantenere spazi verdi curati, ordinati e rigogliosi.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 500ms;">
+                        <div class="service-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.628 2.257c-.77-1.494-2.486-1.494-3.256 0l-7.234 14c-.754 1.458.332 3.193 1.954 3.193h14.468c1.622 0 2.708-1.735 1.954-3.193l-7.234-14zm-1.628 10.743v-5c0-.552.448-1 1-1s1 .448 1 1v5c0 .552-.448 1-1 1s-1-.448-1-1zm1 5c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z"/></svg>
+                        </div>
+                        <h3>Derattizzazione e Disinfestazione</h3>
+                        <p>Eliminiamo ogni minaccia, ristabilendo l'ordine e la sicurezza nel vostro ambiente con interventi mirati.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="clienti" class="section">
+            <div class="container">
+                <div class="text-center animate-on-scroll">
+                    <h2>Clienti che si fidano della nostra forza</h2>
+                    <p>Collaboriamo con aziende leader in diversi settori che esigono eccellenza.</p>
+                </div>
+                <div class="clients-grid">
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 100ms;"><span>Azienda Alpha</span></div>
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 150ms;"><span>Beta Corp</span></div>
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 200ms;"><span>Gamma Logistics</span></div>
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 250ms;"><span>Delta Industries</span></div>
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 300ms;"><span>Epsilon Retail</span></div>
+                    <div class="client-logo animate-on-scroll" style="transition-delay: 350ms;"><span>Zeta Costruzioni</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contatti" class="section">
+            <div class="container">
+                <div class="text-center animate-on-scroll">
+                    <h2>Pronti a Dominare i Vostri Spazi?</h2>
+                    <p>Contattateci per un sopralluogo e un preventivo gratuito e senza impegno. Insieme, definiremo il territorio.</p>
+                </div>
+                <div class="contact-wrapper">
+                    <div class="contact-form animate-on-scroll" style="transition-delay: 100ms;">
+                        <form action="#">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Nome e Cognome" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="company" placeholder="Azienda" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="Telefono">
+                            </div>
+                            <div class="form-group">
+                                <select name="service" required>
+                                    <option value="" disabled selected>Servizio di Interesse...</option>
+                                    <option value="pulizie">Pulizie Civili e Industriali</option>
+                                    <option value="logistica">Logistica e Facchinaggio</option>
+                                    <option value="portierato">Portierato e Guardiania</option>
+                                    <option value="giardinaggio">Giardinaggio</option>
+                                    <option value="disinfestazione">Derattizzazione e Disinfestazione</option>
+                                    <option value="multiservizio">Soluzione Completa</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea name="message" placeholder="Il vostro messaggio..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Invia Richiesta</button>
+                        </form>
+                    </div>
+                    <div class="contact-info animate-on-scroll" style="transition-delay: 200ms;">
+                        <h3>Contatti Diretti</h3>
+                        <ul>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z"/></svg>
+                                <span>Sede Operativa, Italia</span>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 22.621l-3.521-6.795c-.008.004-1.974.975-2.064 1.011-2.24 1.086-6.799-7.82-4.609-8.994l-2.065 1.012-3.522-6.795-1.119 2.238c-1.144 2.288-1.558 5.706 2.458 11.517 4.016 5.811 8.423 7.02 10.746 4.706l1.117-2.195-1.117-2.195z"/></svg>
+                                <span>+39 123 456 7890</span>
+                            </li>
+                            <li>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                                <span>info@komodoservizi.it</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <a href="#home" class="footer-logo">KOMODO<span>.</span></a>
+            <ul class="footer-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chisiamo">Chi Siamo</a></li>
+                <li><a href="#servizi">Servizi</a></li>
+                <li><a href="#clienti">Clienti</a></li>
+                <li><a href="#contatti">Contatti</a></li>
+            </ul>
+            <div class="social-icons">
+                <a href="#" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-3 7h-1.924c-.615 0-1.076.252-1.076.888v1.112h3l-.238 2h-2.762v8h-3v-8h-2v-2h2v-1.073c0-2.006 1.359-3.927 3.879-3.927h2.121v3z"/></svg></a>
+            </div>
+            <p class="copyright">&copy; 2024 Komodo Servizi S.R.L. Tutti i diritti riservati. P.IVA 12345678901</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hamburger Menu
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            navLinks.forEach(link => link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }));
+
+            // Sticky Header
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Scroll Animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Cursor Trail Effect
+            const cursorTrail = document.querySelector('.cursor-trail');
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            const speed = 0.1;
+
+            window.addEventListener('mousemove', e => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                const diffX = mouseX - cursorX;
+                const diffY = mouseY - cursorY;
+                cursorX += diffX * speed;
+                cursorY += diffY * speed;
+                cursorTrail.style.left = cursorX + 'px';
+                cursorTrail.style.top = cursorY + 'px';
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .client-logo');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorTrail.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursorTrail.classList.remove('hover'));
+            });
+
+        });
+    </script>
+</body>
+</html>
